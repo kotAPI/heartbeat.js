@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HeartBeat.js</title>
+	<style type="text/css">
+		body {
+  padding: 5rem;
+  background-color: #f44336;
+  height: 100vh;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+}
+.beat{
+	-webkit-animation: pulsate 1s infinite;
+  animation: pulsate 1s 1;
+  animation-play-state: running;
+}
+.heart {
+  background-color: #fff;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  -webkite-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+  
+}
+
+.heart::before,
+.heart::after {
+  display: inline-block;
+  content: "";
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: 0px;
+  left: -25px;
+}
+.heart::after {
+  top: -25px;
+  left: -0px;
+}
+
+-webkit-@keyframes pulsate {
+  0% {
+    -webkit-transform: rotate(45deg) scale(0.8);
+  }
+  5% {
+    -webkit-transform: rotate(45deg) scale(0.9);
+  }
+  10% {
+    -webkit-transform: rotate(45deg) scale(0.8);
+  }
+  15% {
+    -webkit-transform: rotate(45deg) scale(1);
+  }
+  50% {
+    -webkit-transform: rotate(45deg) scale(0.8);
+  }
+  100% {
+    -webkit-transform: rotate(45deg) scale(0.8);
+  }
+}
+
+@-webkit-keyframes pulsate {
+  0% {
+    -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+    transform: rotate(45deg) scale(0.8);
+  }
+  5% {
+    -webkit-transform: rotate(45deg) scale(0.9);
+            transform: rotate(45deg) scale(0.9);
+  }
+  10% {
+    -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+  }
+  15% {
+    -webkit-transform: rotate(45deg) scale(1);
+            transform: rotate(45deg) scale(1);
+  }
+  50% {
+    -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+  }
+  100% {
+    -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+  }
+}
+
+@keyframes pulsate {
+  0% {
+    -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+    transform: rotate(45deg) scale(0.8);
+  }
+  5% {
+    -webkit-transform: rotate(45deg) scale(0.9);
+            transform: rotate(45deg) scale(0.9);
+  }
+  10% {
+    -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+  }
+  15% {
+    -webkit-transform: rotate(45deg) scale(1);
+            transform: rotate(45deg) scale(1);
+  }
+  50% {
+    -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+  }
+  100% {
+    -webkit-transform: rotate(45deg) scale(0.8);
+            transform: rotate(45deg) scale(0.8);
+  }
+}
+
+
+	</style>
+</head>
+<body>
+	<h1 style="color:white;text-align: center;">HeartBeat.js</h1>
+	<div class="center">
+	  <div class="heart" id="heart">`
+	  </div>
+	</div>
+
+	<script type="text/javascript" src="src/main.js"></script>
+	<script type="text/javascript">
+		var animationDiv = document.getElementById("heart");
+
+
+		var listener = heartbeat(1000)
+		listener.start(()=>{
+			console.log(listener.getElapsedTime())
+			if(listener.getElapsedTime()>=10000){
+				listener.stop()
+			}
+			
+
+
+			
+			   animationDiv.classList.remove("beat");
+			  
+			  // -> triggering reflow /* The actual magic */
+			  // without this it wouldn't work. Try uncommenting the line and the transition won't be retriggered.
+			  // Oops! This won't work in strict mode. Thanks Felis Phasma!
+			  // element.offsetWidth = element.offsetWidth;
+			  // Do this instead:
+			  void animationDiv.offsetWidth;
+			  
+			  // -> and re-adding the class
+			  animationDiv.classList.add("beat");
+    
+
+			console.log("beating!")
+		})
+	</script>
+</body>
+</html>
